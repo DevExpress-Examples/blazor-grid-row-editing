@@ -1,0 +1,25 @@
+﻿@inherits GridEditorBase
+@using System.Linq.Expressions
+
+<DxSpinEdit T="decimal?"
+            Value="GetNumber()"
+            ValueChanged="OnNumberChanged"
+            ValueExpression="GetNumberExpression()"
+            CssClass="w-100"
+            />
+
+@code {
+    [CascadingParameter]
+    public GridEditorValidationMessage ValidationMessage { get; set; }
+
+    decimal? GetNumber() {
+        return (decimal?)GetValue();
+    }
+    void OnNumberChanged(decimal? value) {
+        SetValue(value);
+        ValidationMessage.OnEditorValueChanged();
+    }
+    Expression<Func<decimal?>> GetNumberExpression() {
+        return (Expression<Func<decimal?>>)ValueExpression;
+    }
+}
