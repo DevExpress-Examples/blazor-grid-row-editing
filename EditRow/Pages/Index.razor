@@ -5,7 +5,8 @@
 
 @inject IDbContextFactory<NorthwindContext> NorthwindContextFactory
 
-@if(IsLoading) {    <text>Loading...</text>
+@if(IsLoading) {
+    <text>Loading...</text>
 }else {
     <DxGrid Data="Products"
             EditMode="GridEditMode.EditRow"
