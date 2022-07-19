@@ -14,10 +14,8 @@ The **Index.razor** code does the following:
 * Adds the Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) component. 
 * Activates the [EditRow](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input#grideditmodeeditrow) mode for the Grid.  
 * Specifies the [DataColumnCellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DataColumnCellEditTemplate) to define a common template for Grid edit row cells. Within the template, the [GridEditorValidationMessage](#componentsgrideditorvalidationmessagerazor) custom component is used to display editors and validation errors for them. To select an individual editor for each column, the switch statement is used. 
-
-For the **Unit Price** column, specifies the individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate). The template utilizes the [GridEditorValidationMessage](#componentsgrideditorvalidationmessagerazor) and [GridCurrencyEditor](#componentsgridcurrencyeditorrazor) custom components. Note that if you specify an individual cell template, the common template is ignored for the current column. 
-
-For the **Category Name** column, specifies the individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate) that contains a combobox editor. 
+* For the **Unit Price** column, specifies the individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate). The template utilizes the [GridEditorValidationMessage](#componentsgrideditorvalidationmessagerazor) and [GridCurrencyEditor](#componentsgridcurrencyeditorrazor) custom components. Note that if you specify an individual cell template, the common template is ignored for the current column. 
+* For the **Category Name** column, specifies the individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate) that contains a combobox editor. 
  
 ## Components/GridEditorBase.cs 
  
