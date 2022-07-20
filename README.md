@@ -43,3 +43,13 @@ The component is used in several cases:
 ## Documentation 
 
 [Grid - EditRow Mode](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input#grideditmodeeditrow)
+
+<!-- default file list -->
+## Files to look at*:
+
+* [Index.razor](./EditRow/Pages/Index.razor)
+* [Components/GridEditorBase.cs](./EditRow/Components/GridEditorBase.cs)
+* [Components/GridCurrencyEditor.razor](./EditRow/Components/GridCurrencyEditor.razor)
+* [Components/GridEditorValidationMessage.razor](./EditRow/Components/GridEditorValidationMessage.razor)
+
+<!-- default file list end -->
