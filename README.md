@@ -45,7 +45,7 @@ The component is used in several cases:
 [Grid - EditRow Mode](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input#grideditmodeeditrow)
 
 <!-- default file list -->
-## Files to look at*:
+## Files to look at:
 
 * [Index.razor](./EditRow/Pages/Index.razor)
 * [Components/GridEditorBase.cs](./EditRow/Components/GridEditorBase.cs)
