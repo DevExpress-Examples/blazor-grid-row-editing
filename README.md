@@ -15,13 +15,13 @@ The project includes the following important files:
  
 * Adds a DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) component. 
 * Activates [EditRow](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input#grideditmodeeditrow) mode for the Blazor Grid.  
-* Specifies the [DataColumnCellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DataColumnCellEditTemplate) (used as the common template for Grid edit row cells). Within the template, the [GridEditorValidationMessage](#componentsgrideditorvalidationmessagerazor) custom component is used to display editors and validation errors. A switch statement is used to select an individual editor for each column.
-* The **Unit Price** column uses an individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate). The template utilizes [GridEditorValidationMessage](#componentsgrideditorvalidationmessagerazor) and [GridCurrencyEditor](#componentsgridcurrencyeditorrazor) custom components. Note: if you specify an individual cell template, the common template is ignored for the current column. 
+* Specifies the [DataColumnCellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DataColumnCellEditTemplate) (used as the common template for Grid edit row cells). Within the template, the **GridEditorValidationMessage** custom component is used to display editors and validation errors. A switch statement is used to select an individual editor for each column.
+* The **Unit Price** column uses an individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate). The template utilizes **GridEditorValidationMessage** and **GridCurrencyEditor** custom components. Note: if you specify an individual cell template, the common template is ignored for the current column. 
 * The **Category Name** column uses an individual [CellEditTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellEditTemplate) (contains a combobox editor). 
  
 ## Components/GridEditorBase.cs 
  
-The `GridEditorBase` class is a base class for the [GridCurrencyEditor](#componentsgridcurrencyeditorrazor) component. The class works with editor values and defines `xxxExpression` properties for correct data validation.
+The `GridEditorBase` class is a base class for the **GridCurrencyEditor** component. The class works with editor values and defines `xxxExpression` properties for correct data validation.
  
 ## Components/GridCurrencyEditor.razor 
 
@@ -38,7 +38,7 @@ The component is used in several instances:
  
 * Within the Blazor Grid’s common cell template.
 * Within the individual cell template for the **Category Name** column. 
-* Alongside the [GridCurrencyEditor](#componentsgridcurrencyeditorrazor) component (when used in this manner, you must call the [StateHasChanged](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged?view=aspnetcore-6.0) method in the `GridEditorValidationMessage` component). The method will render the `GridEditorValidationMessage` when currency editor value changes. Refer to the following topic for details: [ASP.NET Core Razor component rendering](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0). 
+* Alongside the **GridCurrencyEditor** component (when used in this manner, you must call the [StateHasChanged](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged?view=aspnetcore-6.0) method in the `GridEditorValidationMessage` component). The method will render the `GridEditorValidationMessage` when currency editor value changes. Refer to the following topic for details: [ASP.NET Core Razor component rendering](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0). 
 
 ## Documentation 
 
