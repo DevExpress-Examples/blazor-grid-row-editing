@@ -1,77 +1,33 @@
 ﻿@page "/"
 @implements IDisposable
 @using AutoMapper
+@using DevExpress.Blazor.Internal
 @using EditRow.Components
 
 @inject IDbContextFactory<NorthwindContext> NorthwindContextFactory
+@inject IGlobalOptionsService GlobalOptionsService
 
 @if(IsLoading) {
     <text>Loading...</text>
 }else {
     <DxGrid Data="Products"
+            EditorRenderMode="GridEditorRenderMode.Integrated"
             EditMode="GridEditMode.EditRow"
-            CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
             CustomizeEditModel="Grid_CustomizeEditModel"
-            EditModelSaving="Grid_EditModelSaving"
-            >
+            EditModelSaving="Grid_EditModelSaving">
         <Columns>
             <DxGridCommandColumn DeleteButtonVisible="false" VisibleIndex="0" />
             <DxGridDataColumn FieldName="ProductName" VisibleIndex="1" />
             <DxGridDataColumn FieldName="QuantityPerUnit" VisibleIndex="5" />
             <DxGridDataColumn FieldName="UnitsInStock" VisibleIndex="4" />
-            <DxGridDataColumn FieldName="Discontinued" VisibleIndex="6">
-                <CellDisplayTemplate>
-                    <DxCheckBox CssClass="d-inline-block" Enabled="false" Checked="(bool)context.Value" />
-                </CellDisplayTemplate>
-            </DxGridDataColumn>
-            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" VisibleIndex="3">
-                <CellEditTemplate>
-                    <GridEditorValidationMessage EditTemplateContext="context">
-                        <GridCurrencyEditor EditTemplateContext="context" />
-                    </GridEditorValidationMessage>
-                </CellEditTemplate>
-            </DxGridDataColumn>
-            <DxGridDataColumn FieldName="CategoryId" Caption="Category Name" TextAlignment="GridTextAlignment.Left" VisibleIndex="2">
-                <CellEditTemplate>
-                    <GridEditorValidationMessage EditTemplateContext="context">
-                        @{
-                            var product = (EditableProduct)context.EditModel;
-                        }
-                        <DxComboBox Data="Categories"
-                                    @bind-Value="product.CategoryId"
-                                    ValueFieldName="CategoryId"
-                                    TextFieldName="CategoryName"
-                                    FilteringMode="DataGridFilteringMode.Contains"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                                    CssClass="w-100"
-                                    />
-                    </GridEditorValidationMessage>
-                </CellEditTemplate>
+            <DxGridDataColumn FieldName="Discontinued" VisibleIndex="6"/>
+            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" VisibleIndex="3"/>
+            <DxGridDataColumn FieldName="CategoryId" Caption="Category Name" VisibleIndex="2">
+                <EditSettings>
+                    <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName"/>
+                </EditSettings>
             </DxGridDataColumn>
         </Columns>
-        <DataColumnCellEditTemplate>
-            @{
-                var product = (EditableProduct)context.EditModel;
-            }
-            <GridEditorValidationMessage EditTemplateContext="context">
-                @switch(context.DataColumn.FieldName) {
-                    case "ProductName":
-                        <DxTextBox @bind-Text="@product.ProductName" CssClass="w-100" />
-                        break;
-                    case "QuantityPerUnit":
-                        <DxTextBox @bind-Text="@product.QuantityPerUnit" CssClass="w-100" />
-                        break;
-                    case "UnitsInStock":
-                        <DxSpinEdit @bind-Value="@product.UnitsInStock" CssClass="w-100" />
-                        break;
-                    case "Discontinued":
-                        <DxCheckBox @bind-Checked="@product.Discontinued" CssClass="w-100" />
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            </GridEditorValidationMessage>
-        </DataColumnCellEditTemplate>
     </DxGrid>
 }
 
@@ -79,7 +35,6 @@
     NorthwindContext Northwind { get; set; }
     List<Product> Products { get; set; }
     List<Category> Categories { get; set; }
-    Dictionary<int, string> CategoryNamesIndex { get; set; }
 
     IMapper ProductMapper { get; set; }
     bool IsLoading { get; set; } = true;
@@ -91,22 +46,16 @@
         Northwind = NorthwindContextFactory.CreateDbContext();
         Products = await Northwind.Products.ToListAsync();
         Categories = await Northwind.Categories.ToListAsync();
-        CategoryNamesIndex = Categories.ToDictionary(i => i.CategoryId, i => i.CategoryName);
+
+        GlobalOptionsService.GlobalOptions.ShowValidationIcon = true;
 
         IsLoading = false;
-    }
-
-    void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-        string displayText;
-        var categoryID = Convert.ToInt32(e.GetRowValue("CategoryId"));
-        if(e.FieldName == "CategoryId" && CategoryNamesIndex.TryGetValue(categoryID, out displayText))
-            e.DisplayText = displayText;
     }
 
     void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
         var editableProduct = new EditableProduct();
         if(!e.IsNew)
-            ProductMapper.Map<Product, EditableProduct>((Product)e.DataItem, editableProduct);
+            ProductMapper.Map((Product)e.DataItem, editableProduct);
         e.EditModel = editableProduct;
     }
 
@@ -115,7 +64,7 @@
         var product = e.IsNew
             ? new Product()
             : Northwind.Products.Find(e.Grid.GetDataItemValue(e.DataItem, "ProductId"));
-        ProductMapper.Map<EditableProduct, Product>(editableProduct, product);
+        ProductMapper.Map(editableProduct, product);
 
         if(e.IsNew)
             await Northwind.Products.AddAsync(product);

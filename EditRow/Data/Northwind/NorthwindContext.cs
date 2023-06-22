@@ -18,12 +18,6 @@ namespace EditRow.Data.Northwind {
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            if(!optionsBuilder.IsConfigured) {
-                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=Northwind;Integrated Security=true");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
             modelBuilder.Entity<Category>(entity => {
