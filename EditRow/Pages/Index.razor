@@ -16,17 +16,21 @@
             CustomizeEditModel="Grid_CustomizeEditModel"
             EditModelSaving="Grid_EditModelSaving">
         <Columns>
-            <DxGridCommandColumn DeleteButtonVisible="false" VisibleIndex="0" />
-            <DxGridDataColumn FieldName="ProductName" VisibleIndex="1" />
-            <DxGridDataColumn FieldName="QuantityPerUnit" VisibleIndex="5" />
-            <DxGridDataColumn FieldName="UnitsInStock" VisibleIndex="4" />
-            <DxGridDataColumn FieldName="Discontinued" VisibleIndex="6"/>
-            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" VisibleIndex="3"/>
-            <DxGridDataColumn FieldName="CategoryId" Caption="Category Name" VisibleIndex="2">
+            <DxGridCommandColumn DeleteButtonVisible="false" Width="15%" />
+            <DxGridDataColumn FieldName="ProductName" Width="25%" />
+            <DxGridDataColumn FieldName="CategoryId" Caption="Category Name" Width="10%">
                 <EditSettings>
                     <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName"/>
                 </EditSettings>
             </DxGridDataColumn>
+            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%">
+                <EditSettings>
+                    <DxSpinEditSettings MinValue="0M" Mask="n3" />
+                </EditSettings>
+            </DxGridDataColumn>
+            <DxGridDataColumn FieldName="UnitsInStock" />
+            <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" />   
+            <DxGridDataColumn FieldName="Discontinued" />
         </Columns>
     </DxGrid>
 }
