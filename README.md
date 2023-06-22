@@ -11,7 +11,7 @@ This example demonstrates how to enable inline data editing in the DevExpress Bl
 
 The Grid automatically generates and configues editors for columns based on assosiated data types. When the Grid's [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode) property is set to `EditRow`, the Grid displays these editors instead of the edited row. Set the [EditorRenderMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditorRenderMode) property to `Integrated` to hide editor borders and render editors so that they occupy the entire grid cell.
 
-A data column's [EditSettings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.EditSettings) property allows you to customize the editor associated with this column. This example customizes spin editor generated for the **Unit Price** column and replaces the **Category Name** column's spin editor with a combo box.
+A data column's [EditSettings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.EditSettings) property allows you to customize the editor associated with this column. This example customizes the spin editor generated for the **Unit Price** column and replaces the **Category Name** column's spin editor with a combo box.
 
 ## Documentation 
 
