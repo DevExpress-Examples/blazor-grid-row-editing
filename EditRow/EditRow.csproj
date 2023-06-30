@@ -14,9 +14,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Northwind.mdf" />
-  </ItemGroup>
-
 </Project>
