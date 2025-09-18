@@ -11,9 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-
-builder.Services.AddDevExpressBlazor(opt => {
-    opt.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+builder.Services.AddDevExpressBlazor(options => {
+    options.SizeMode = DevExpress.Blazor.SizeMode.Medium;
 });
 
 builder.Services.AddEntityFrameworkSqlite();
